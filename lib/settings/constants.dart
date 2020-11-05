@@ -47,3 +47,12 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: kTextColor),
   );
 }
+
+// Corpdrão do gradiente da aplicação.
+BoxDecoration boxDecoration() {
+  return BoxDecoration(
+      gradient: LinearGradient(colors: [
+    Color.fromARGB(255, 211, 118, 130),
+    Color.fromARGB(255, 253, 181, 168)
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight));
+}
