@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'size_config.dart';
 
-const kPrimaryColor = Color(0xFFFF7643);
+const kPrimaryColor = Color.fromARGB(255, 211, 118, 130);
 const kPrimaryLightColor = Color(0xFFFFECDF);
+// Constantes do LinearGradient
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
+  colors: [
+    Color.fromARGB(255, 211, 118, 130),
+    Color.fromARGB(255, 253, 181, 168),
+  ],
 );
+
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 const kAnimationDuration = Duration(milliseconds: 200);
 
-final headingStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
+const headingStyle = TextStyle(
+  ///Linha comentada por que estava apresentando erro no meu celular
+  //fontSize: getProportionateScreenWidth(24.0),
+  fontSize: 24.0,
   fontWeight: FontWeight.bold,
-  color: Colors.black,
+  color: Colors.white,
   height: 1.5,
+  fontFamily: 'MuseoModerno',
 );
 
 const defaultDuration = Duration(milliseconds: 250);
@@ -46,13 +54,4 @@ OutlineInputBorder outlineInputBorder() {
     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
     borderSide: BorderSide(color: kTextColor),
   );
-}
-
-// Corpdrão do gradiente da aplicação.
-BoxDecoration boxDecoration() {
-  return BoxDecoration(
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 211, 118, 130),
-    Color.fromARGB(255, 253, 181, 168)
-  ], begin: Alignment.topLeft, end: Alignment.bottomRight));
 }

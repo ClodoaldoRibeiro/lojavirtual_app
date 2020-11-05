@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
+///Tema Padrão da aplicação
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: "Muli",
-    primaryColor: Color.fromARGB(255, 4, 125, 141),
+    fontFamily: 'Montserrat',
+    primaryColor: kPrimaryColor,
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
     inputDecorationTheme: inputDecorationTheme(),
