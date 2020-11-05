@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lojavirtual_app/screens/home_screen.dat.dart';
+import 'package:lojavirtual_app/settings/theme.dart';
 
 void main() {
   runApp(MyApp());
-  Firestore.instance.collection("usuarios").document("mensage").setData(
-      {"caio": "Olá", "Clodoaldo": "Diga caba"});
 }
 
 class MyApp extends StatelessWidget {
@@ -13,11 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loja Virtual',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Center(),
+      theme: theme(),
+      home: HomeScreen(),
     );
   }
 }
