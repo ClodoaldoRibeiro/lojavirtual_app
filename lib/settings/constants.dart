@@ -13,6 +13,12 @@ const kPrimaryGradientColor = LinearGradient(
   ],
 );
 
+const kCustomDrawerGradientColor = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [Color.fromARGB(255, 203, 236, 241), Colors.white],
+);
+
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 const kAnimationDuration = Duration(milliseconds: 200);
@@ -20,7 +26,7 @@ const kAnimationDuration = Duration(milliseconds: 200);
 const headingStyle = TextStyle(
   ///Linha comentada por que estava apresentando erro no meu celular
   //fontSize: getProportionateScreenWidth(24.0),
-  fontSize: 24.0,
+  fontSize: 20.0,
   fontWeight: FontWeight.bold,
   color: Colors.white,
   height: 1.5,

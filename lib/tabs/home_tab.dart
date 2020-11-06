@@ -40,16 +40,23 @@ class HomeTab extends StatelessWidget {
               else
                 return SliverStaggeredGrid.count(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 1.0,
-                  crossAxisSpacing: 1.0,
+                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 5.0,
                   staggeredTiles: snapshot.data.documents.map((doc) {
                     return StaggeredTile.count(doc.data["x"], doc.data["y"]);
                   }).toList(),
                   children: snapshot.data.documents.map((doc) {
-                    return FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: doc.data["image"],
-                      fit: BoxFit.cover,
+                    return Container(
+                      padding: EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(11),
+                        color: Colors.white38,
+                      ),
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: doc.data["image"],
+                        fit: BoxFit.cover,
+                      ),
                     );
                   }).toList(),
                 );
@@ -70,7 +77,7 @@ class HomeTab extends StatelessWidget {
           begin: kPrimaryGradientColor.begin,
           end: kPrimaryGradientColor.end,
         ),
-        borderRadius: BorderRadius.circular(18),
+//        borderRadius: BorderRadius.circular(18),
       ),
     );
   }
