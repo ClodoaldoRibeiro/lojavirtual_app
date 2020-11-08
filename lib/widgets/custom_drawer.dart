@@ -4,6 +4,8 @@ import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tiles/drawer_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import 'Items_menu_drawer.dart';
+
 class CustomDrawer extends StatelessWidget {
   final PageController pageController;
 
@@ -28,7 +30,7 @@ class CustomDrawer extends StatelessWidget {
                       top: 40.0,
                       left: 0.0,
                       child: Text(
-                        "Loja Virtual",
+                        KNomeLoja,
                         style: TextStyle(
                           fontSize: 41.0,
                           fontWeight: FontWeight.bold,
@@ -68,21 +70,21 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               Divider(),
-              DrawerTile(Icons.home_outlined, "Início", pageController, 0),
+              DrawerTile(Icons.home_outlined, kItemInicio, pageController, 0),
               DrawerTile(
-                  Icons.list_alt_outlined, "Produtos", pageController, 1),
-              DrawerTile(Icons.playlist_add_check_outlined, "Meus Pedidos",
+                  Icons.list_alt_outlined, KProdutos, pageController, 1),
+              DrawerTile(Icons.playlist_add_check_outlined, kMeusPedidos,
                   pageController, 2),
-              DrawerTile(Icons.favorite_border_outlined, "Meus favoritos",
+              DrawerTile(Icons.favorite_border_outlined, KMeusFavoritos,
                   pageController, 3),
-              DrawerTile(Icons.location_on_outlined, "Emcontrar lojas",
+              DrawerTile(Icons.location_on_outlined, KEncontrarLojas,
                   pageController, 4),
               DrawerTile(
-                  Icons.phone_android_outlined, "Contato", pageController, 5),
-              DrawerTile(Icons.settings_applications_outlined, "Configurações",
+                  Icons.phone_android_outlined, KContato, pageController, 5),
+              DrawerTile(Icons.settings_applications_outlined, KConfiguracoes,
                   pageController, 6),
               Divider(),
-              DrawerTile(Icons.exit_to_app_outlined, "Sair", pageController, 7),
+              DrawerTile(Icons.exit_to_app_outlined, KSair, pageController, 7),
             ],
           )
         ],

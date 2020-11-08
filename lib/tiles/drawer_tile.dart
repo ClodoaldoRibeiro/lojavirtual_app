@@ -29,6 +29,7 @@ class DrawerTile extends StatelessWidget {
                       ? Theme.of(context).primaryColor
                       : Colors.grey[700],
                 ),
+
                 /// Espaço entre o icone e o texto
                 SizedBox(
                   width: 18.0,
@@ -40,7 +41,7 @@ class DrawerTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
+                    fontFamily: 'Montserrat',
                     color: controller.page.round() == page
                         ? Theme.of(context).primaryColor
                         : Colors.grey[700],
