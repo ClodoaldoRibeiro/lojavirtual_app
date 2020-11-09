@@ -11,7 +11,7 @@ class HomeTab extends StatelessWidget {
       children: <Widget>[
         _buildBodyBack(),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(7.0),
           child: CustomScrollView(slivers: <Widget>[
             SliverAppBar(
               floating: true,

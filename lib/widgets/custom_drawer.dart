@@ -70,7 +70,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               Divider(),
-              DrawerTile(Icons.home_outlined, kItemInicio, pageController, 0),
+              DrawerTile(Icons.home_outlined, kInicio, pageController, 0),
               DrawerTile(
                   Icons.list_alt_outlined, KProdutos, pageController, 1),
               DrawerTile(Icons.playlist_add_check_outlined, kMeusPedidos,

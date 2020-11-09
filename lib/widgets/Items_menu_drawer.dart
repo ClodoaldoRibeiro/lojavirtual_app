@@ -1,7 +1,7 @@
 const KNomeLoja = "Loja Virtual";
 
 //Nome dos Items do menu
-const kItemInicio = "Início";
+const kInicio = "Início";
 const KProdutos = "Produtos";
 const kMeusPedidos = "Meus Pedidos";
 const KMeusFavoritos = "Meus favoritos";
