@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/datas/product_data.dart';
+import 'package:lojavirtual_app/screens/product_screen.dart';
 
 class ProductTileGrid extends StatelessWidget {
   final ProductData product;
@@ -9,6 +10,10 @@ class ProductTileGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ProductScreen(product)));
+      },
       child: Card(
         semanticContainer: true,
         child: Column(
@@ -31,7 +36,7 @@ class ProductTileGrid extends StatelessWidget {
                       Text(
                         product.title,
                         style: TextStyle(
-                            fontSize: 13.0, fontWeight: FontWeight.w500),
+                            fontSize: 13.0, fontWeight: FontWeight.w500), maxLines: 2,
                       ),
                       Text(
                         "R\$ ${product.price.toStringAsFixed(2)}",
