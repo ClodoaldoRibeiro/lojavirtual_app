@@ -9,7 +9,7 @@ const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
   colors: [
-    Color.fromARGB(255, 211, 118, 130),
+    kPrimaryColor,
     Color.fromARGB(255, 253, 181, 168),
   ],
 );
