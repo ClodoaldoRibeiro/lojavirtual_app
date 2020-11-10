@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    Size size = MediaQuery.of(context).size;
     return PageView(
       controller: _pageController,
       physics: NeverScrollableScrollPhysics(),
@@ -27,7 +28,21 @@ class HomeScreen extends StatelessWidget {
               centerTitle: true,
             ),
             drawer: CustomDrawer(_pageController),
-            body: ProductsTab()),
+            body: Container(
+                height: size.height,
+                width: double.infinity,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Image.asset("images/fundo_04.jpg",
+                          width: size.width * 1.0),
+                    ),
+                    ProductsTab(),
+                  ],
+                ))),
 
         //Scaffold = KMeusPedidos
         Scaffold(
@@ -38,8 +53,19 @@ class HomeScreen extends StatelessWidget {
             ),
             drawer: CustomDrawer(_pageController),
             body: Container(
-              color: Colors.white,
-            )),
+                height: size.height,
+                width: double.infinity,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Image.asset("images/fundo_09.png",
+                          width: size.width * 1.0),
+                    ),
+                  ],
+                ))),
 
         //Scaffold = KMeusFavoritos
         Scaffold(
@@ -50,8 +76,19 @@ class HomeScreen extends StatelessWidget {
             ),
             drawer: CustomDrawer(_pageController),
             body: Container(
-              color: Colors.white,
-            )),
+                height: size.height,
+                width: double.infinity,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Image.asset("images/fundo_11.png",
+                          width: size.width * 1.0),
+                    ),
+                  ],
+                ))),
 
         //Scaffold = KEncontrarLojas
         Scaffold(
