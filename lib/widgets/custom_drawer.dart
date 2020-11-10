@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tiles/drawer_tile.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import 'Items_menu_drawer.dart';
 

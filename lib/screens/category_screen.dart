@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lojavirtual_app/datas/product_data.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
-import 'package:lojavirtual_app/widgets/Items_menu_drawer.dart';
+import 'package:lojavirtual_app/tiles/product_tile_grid.dart';
+import 'package:lojavirtual_app/tiles/product_tile_list.dart';
 
 class CategoryScreen extends StatelessWidget {
   CategoryScreen(this.documentSnapshot);
@@ -29,17 +31,50 @@ class CategoryScreen extends StatelessWidget {
               ],
             ),
           ),
-          body: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              Container(
-                color: Colors.white,
-              ),
-              Container(
-                color: Colors.black12,
-              ),
-            ],
-          ),
+          body: FutureBuilder<QuerySnapshot>(
+              future: Firestore.instance
+                  .collection("products")
+                  .document(documentSnapshot.documentID)
+                  .collection("items")
+                  .getDocuments(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData)
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                else {
+                  return TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      GridView.builder(
+                          padding: EdgeInsets.all(4.0),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 4.0,
+                            childAspectRatio: 0.65,
+                          ),
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, index) {
+                            ProductData data = ProductData.fromDocument(
+                                snapshot.data.documents[index]);
+                            data.category = this.documentSnapshot.documentID;
+                            return ProductTileGrid(data);
+                          }),
+                      ListView.builder(
+                          padding: EdgeInsets.all(4.0),
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, index) {
+                            ProductData data = ProductData.fromDocument(
+                                snapshot.data.documents[index]);
+                            data.category = this.documentSnapshot.documentID;
+                            return ProductTileList(data);
+                          }),
+                    ],
+                  );
+                }
+              }),
         ));
   }
 }
