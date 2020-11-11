@@ -10,17 +10,18 @@ ThemeData theme() {
     primaryColor: kPrimaryColor,
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
-    inputDecorationTheme: inputDecorationTheme(),
+   // inputDecorationTheme: inputDecorationTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
 
 InputDecorationTheme inputDecorationTheme() {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(28),
+    borderRadius: BorderRadius.circular(29),
     borderSide: BorderSide(color: kTextColor),
     gapPadding: 10,
   );
+
   return InputDecorationTheme(
     // Se você estiver usando a versão mais recente do flutter, o texto da tabela e o texto da dica são mostrados como este
     // se você está usando flutter menos de 1,20. * então talvez isso não esteja funcionando corretamente
