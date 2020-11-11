@@ -14,6 +14,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final ProductData productData;
+  String size;
 
   _ProductScreenState(this.productData);
 
@@ -28,7 +29,7 @@ class _ProductScreenState extends State<ProductScreen> {
       body: ListView(
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 0.90,
+            aspectRatio: 0.78,
             child: Carousel(
               images: productData.images.map((url) {
                 return NetworkImage(url);
@@ -46,16 +47,72 @@ class _ProductScreenState extends State<ProductScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(productData.title,
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                     maxLines: 3),
+                Row(
+                  children: [
+                    Text(
+                      "Apenas ",
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: kPrimaryColor),
+                    ),
+                    Text(
+                      "R\$ ${productData.price.toStringAsFixed(2)}",
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: kPrimaryColor),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 24.00,
+                ),
                 Text(
-                  "R\$ ${productData.price.toStringAsFixed(2)}",
+                  "Tamanho ",
                   style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: kPrimaryColor),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 34.00,
+                  child: GridView(
+                    padding: EdgeInsets.symmetric(vertical: 4.0),
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 8.0,
+                        childAspectRatio: 0.5),
+                    children: productData.sizes.map((s) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            size = s;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0)),
+                              border: Border.all(
+                                  color: s == size
+                                      ? kPrimaryColor
+                                      : Colors.grey[500],
+                                  width: 3.0)),
+                          width: 50.0,
+                          alignment: Alignment.center,
+                          child: Text(s),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: 24.00,
                 ),
               ],
             ),
