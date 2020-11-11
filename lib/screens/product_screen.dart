@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/datas/product_data.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:lojavirtual_app/widgets/default_button.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductData productData;
@@ -112,8 +113,29 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 24.00,
+                  height: 35.0,
                 ),
+                DefaultButton(
+                  text: "Adicionar ao carinho",
+                  press: size != null ? () {} : null,
+                ),
+                SizedBox(
+                  height: 50.0,
+                ),
+                Text(
+                  "Descrição",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  productData.description,
+                  style: TextStyle(fontSize: 14.0),
+                )
               ],
             ),
           )
