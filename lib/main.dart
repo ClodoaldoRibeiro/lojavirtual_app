@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lojavirtual_app/screens/home_screen.dat.dart';
+import 'package:lojavirtual_app/screens/bem_vindo.dart';
 import 'package:lojavirtual_app/settings/theme.dart';
 import 'package:lojavirtual_app/widgets/Items_menu_drawer.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: KNomeLoja,
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: HomeScreen(),
+      home: BemVindo(),
     );
   }
 }

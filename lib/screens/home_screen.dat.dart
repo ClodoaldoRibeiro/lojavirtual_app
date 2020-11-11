@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
-import 'package:lojavirtual_app/settings/size_config.dart';
 import 'package:lojavirtual_app/tabs/home_tab.dart';
 import 'package:lojavirtual_app/tabs/products_tab.dart';
 import 'package:lojavirtual_app/widgets/Items_menu_drawer.dart';
@@ -11,7 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+//    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return PageView(
       controller: _pageController,
