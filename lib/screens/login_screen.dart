@@ -29,6 +29,7 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: size.height * 0.05),
             Text(
               "Fazer Login",
               style: TextStyle(
@@ -38,19 +39,23 @@ class Body extends StatelessWidget {
                   height: 1.5,
                   fontFamily: 'MuseoModerno'),
             ),
-            SizedBox(height: size.height * 0.05),
+            SizedBox(height: size.height * 0.1),
             SizedBox(
               width: size.height * 0.48,
               child: RoundedInputField(
-                hintText: "Digite o e-mail",
+                icon: Icons.email_outlined,
+                keyboardType: TextInputType.emailAddress,
+                hintText: "Digite seu e-mail",
                 onChanged: (value) {},
               ),
             ),
             SizedBox(
               width: size.height * 0.48,
-              child: RoundedPasswordField(),
+              child: RoundedPasswordField(
+                hintText: "Digite sua senha",
+              ),
             ),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.15),
             SizedBox(
               width: size.height * 0.48,
               child: DefaultButton(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lojavirtual_app/screens/signup_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/settings/size_config.dart';
 import 'package:lojavirtual_app/widgets/default_button.dart';
 
 import 'login_screen.dart';
 
-class BemVindo extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -26,6 +27,7 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: size.height * 0.10),
             Text(
               "Seja bem-vindo!",
               style: TextStyle(
@@ -44,7 +46,7 @@ class Body extends StatelessWidget {
                   height: 1.5,
                   fontFamily: 'MuseoModerno'),
             ),
-            SizedBox(height: size.height * 0.20),
+            SizedBox(height: size.height * 0.22),
             SizedBox(
               width: size.height * 0.48,
               child: DefaultButton(
@@ -71,7 +73,7 @@ class Body extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return null;
+                        return SignUpScreen();
                       },
                     ),
                   );

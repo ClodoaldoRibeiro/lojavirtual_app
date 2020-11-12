@@ -3,9 +3,12 @@ import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/widgets/text_field_container.dart';
 
 class RoundedPasswordField extends StatelessWidget {
+  final String hintText;
   final ValueChanged<String> onChanged;
+
   const RoundedPasswordField({
     Key key,
+    this.hintText,
     this.onChanged,
   }) : super(key: key);
 
@@ -17,13 +20,13 @@ class RoundedPasswordField extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
-          hintText: "Digite a senha",
+          hintText: hintText,
           icon: Icon(
-            Icons.lock,
+            Icons.lock_outline,
             color: kPrimaryColor,
           ),
           suffixIcon: Icon(
-            Icons.visibility,
+            Icons.visibility_outlined,
             color: kPrimaryColor,
           ),
           border: InputBorder.none,

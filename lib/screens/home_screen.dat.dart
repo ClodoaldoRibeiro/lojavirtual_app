@@ -124,6 +124,7 @@ class HomeScreen extends StatelessWidget {
             body: Container(
               color: Colors.white,
             )),
+        //Scaffold = KConfiguracoes
       ],
     );
   }
