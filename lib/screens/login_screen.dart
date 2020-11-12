@@ -55,7 +55,19 @@ class Body extends StatelessWidget {
                 hintText: "Digite sua senha",
               ),
             ),
-            SizedBox(height: size.height * 0.15),
+            Align(
+              alignment: Alignment.center,
+              child: FlatButton(
+                child: Text(
+                  "Esqueci minha senha",
+                  style: TextStyle(
+                      fontSize: 13.0,
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SizedBox(height: size.height * 0.12),
             SizedBox(
               width: size.height * 0.48,
               child: DefaultButton(
