@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tabs/home_tab.dart';
 import 'package:lojavirtual_app/tabs/products_tab.dart';
-import 'package:lojavirtual_app/widgets/Items_menu_drawer.dart';
+import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
 import 'package:lojavirtual_app/widgets/custom_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                     Positioned(
                       top: 0,
                       left: 0,
-                      child: Image.asset("images/fundo_04.jpg",
+                      child: Image.asset("assets/images/fundo_09.png",
                           width: size.width * 1.0),
                     ),
                     ProductsTab(),
@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                     Positioned(
                       top: 0,
                       left: 0,
-                      child: Image.asset("images/fundo_09.png",
+                      child: Image.asset("assets/images/fundo_09.png",
                           width: size.width * 1.0),
                     ),
                   ],
@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                     Positioned(
                       top: 0,
                       left: 0,
-                      child: Image.asset("images/fundo_11.png",
+                      child: Image.asset("assets/images/fundo_09.png",
                           width: size.width * 1.0),
                     ),
                   ],

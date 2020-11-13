@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/theme.dart';
-import 'package:lojavirtual_app/widgets/Items_menu_drawer.dart';
+import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
 
 void main() {
   runApp(MyApp());

@@ -58,8 +58,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - images/
-    - icons/
+    - assets/images/
+    - assets/icons/
 
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -90,12 +90,12 @@ flutter:
   fonts:
     - family: MuseoModerno
       fonts:
-        - asset: fonts/MuseoModerno-Light.ttf
+        - asset: assets/fonts/MuseoModerno-Light.ttf
 
     - family: Raleway
       fonts:
-        - asset: fonts/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway-Regular.ttf
 
     - family: Montserrat
       fonts:
-        - asset: fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf

@@ -89,15 +89,15 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SocalIcon(
-                  iconSrc: "icons/facebook.svg",
+                  iconSrc: "assets/icons/facebook.svg",
                   press: () {},
                 ),
                 SocalIcon(
-                  iconSrc: "icons/twitter.svg",
+                  iconSrc: "assets/icons/twitter.svg",
                   press: () {},
                 ),
                 SocalIcon(
-                  iconSrc: "icons/google-plus.svg",
+                  iconSrc: "assets/icons/google-plus.svg",
                   press: () {},
                 ),
               ],
@@ -132,7 +132,7 @@ class Background extends StatelessWidget {
             top: 0,
             left: 0,
             child: Image.asset(
-              "images/fundo_09.png",
+              "assets/images/fundo_09.png",
               width: size.width * 1.0,
             ),
           ),
