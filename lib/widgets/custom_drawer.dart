@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tiles/drawer_tile.dart';
 
@@ -61,6 +62,10 @@ class CustomDrawer extends StatelessWidget {
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold),
                             ),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => WelcomeScreen()));
+                            },
                           ),
                         ],
                       ),
@@ -70,8 +75,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               Divider(),
               DrawerTile(Icons.home_outlined, kInicio, pageController, 0),
-              DrawerTile(
-                  Icons.list_alt_outlined, KProdutos, pageController, 1),
+              DrawerTile(Icons.list_alt_outlined, KProdutos, pageController, 1),
               DrawerTile(Icons.playlist_add_check_outlined, kMeusPedidos,
                   pageController, 2),
               DrawerTile(Icons.favorite_border_outlined, KMeusFavoritos,

@@ -17,93 +17,126 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.15),
-            Text(
-              "Registra-me",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: getProportionateScreenHeight(22.0),
-                  color: kPrimaryColor,
-                  height: 1.5,
-                  fontFamily: 'MuseoModerno'),
-            ),
-            SizedBox(height: size.height * 0.05),
-            SizedBox(
-              width: size.height * 0.48,
-              child: RoundedInputField(
-                hintText: "Infome o nome completo",
-                onChanged: (value) {},
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: size.height * 0.12),
+              Text(
+                "Registra-me",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: getProportionateScreenHeight(22.0),
+                    color: kPrimaryColor,
+                    height: 1.5,
+                    fontFamily: 'MuseoModerno'),
               ),
-            ),
-            SizedBox(
-              width: size.height * 0.48,
-              child: RoundedInputField(
-                icon: Icons.email_outlined,
-                keyboardType: TextInputType.emailAddress,
-                hintText: "Informe seu e-mail",
-                onChanged: (value) {},
-              ),
-            ),
-            SizedBox(
-              width: size.height * 0.48,
-              child: RoundedPasswordField(
-                hintText: "Criar uma senha",
-                onChanged: (value) {},
-              ),
-            ),
-            SizedBox(
-              width: size.height * 0.48,
-              child: RoundedPasswordField(
-                hintText: "Confirma sua senha",
-                onChanged: (value) {},
-              ),
-            ),
-            SizedBox(height: size.height * 0.08),
-            SizedBox(
-              width: size.height * 0.48,
-              child: DefaultButton(
-                text: "Cadastrar",
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return HomeScreen();
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: size.height * 0.05),
-            OrDivider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SocalIcon(
-                  iconSrc: "assets/icons/facebook.svg",
-                  press: () {},
+              SizedBox(height: size.height * 0.05),
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedInputField(
+                  hintText: "Infome o nome completo",
+                  onChanged: (value) {},
+                  validator: (text) {
+                    if (text.isEmpty) return "Informe seu nome!";
+                  },
                 ),
-                SocalIcon(
-                  iconSrc: "assets/icons/twitter.svg",
-                  press: () {},
+              ),
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedInputField(
+                  icon: Icons.email_outlined,
+                  keyboardType: TextInputType.emailAddress,
+                  hintText: "Informe seu e-mail",
+                  onChanged: (value) {},
+                  validator: (text) {
+                    if (text.isEmpty || !text.contains("@"))
+                      return "E-mail inválido!";
+                  },
                 ),
-                SocalIcon(
-                  iconSrc: "assets/icons/google-plus.svg",
-                  press: () {},
+              ),
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedPasswordField(
+                  hintText: "Criar uma senha",
+                  onChanged: (value) {},
+                  validator: (text) {
+                    if (text.isEmpty || text.length < 6)
+                      return "Senha inválida!";
+                  },
                 ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.1),
-          ],
+              ),
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedPasswordField(
+                  hintText: "Confirma sua senha",
+                  onChanged: (value) {},
+                  validator: (text) {
+                    if (text.isEmpty || text.length < 6)
+                      return "Cofirmação inválida!";
+                  },
+                ),
+              ),
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedInputField(
+                  icon: Icons.location_on_outlined,
+                  hintText: "Infome o endereço",
+                  onChanged: (value) {},
+                  validator: (text) {
+                    if (text.isEmpty) return "Informe o endereço!";
+                  },
+                ),
+              ),
+              SizedBox(height: size.height * 0.08),
+              SizedBox(
+                width: size.height * 0.48,
+                child: DefaultButton(
+                  text: "Cadastrar",
+                  press: () {
+                    if (_formKey.currentState.validate()) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return HomeScreen();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+              SizedBox(height: size.height * 0.05),
+              OrDivider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SocalIcon(
+                    iconSrc: "assets/icons/facebook.svg",
+                    press: () {},
+                  ),
+                  SocalIcon(
+                    iconSrc: "assets/icons/twitter.svg",
+                    press: () {},
+                  ),
+                  SocalIcon(
+                    iconSrc: "assets/icons/google-plus.svg",
+                    press: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: size.height * 0.1),
+            ],
+          ),
         ),
       ),
     );

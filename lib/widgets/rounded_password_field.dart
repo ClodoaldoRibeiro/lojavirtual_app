@@ -5,11 +5,13 @@ import 'package:lojavirtual_app/widgets/text_field_container.dart';
 class RoundedPasswordField extends StatelessWidget {
   final String hintText;
   final ValueChanged<String> onChanged;
+  final ValueChanged<String> validator;
 
   const RoundedPasswordField({
     Key key,
     this.hintText,
     this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class RoundedPasswordField extends StatelessWidget {
       child: TextFormField(
         obscureText: true,
         onChanged: onChanged,
+        validator: validator,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           hintText: hintText,

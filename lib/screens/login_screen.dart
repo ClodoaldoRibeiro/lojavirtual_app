@@ -17,74 +17,87 @@ class LoginScreen extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Background(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.05),
-            Text(
-              "Fazer Login",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: getProportionateScreenHeight(22.0),
-                  color: kPrimaryColor,
-                  height: 1.5,
-                  fontFamily: 'MuseoModerno'),
-            ),
-            SizedBox(height: size.height * 0.1),
-            SizedBox(
-              width: size.height * 0.48,
-              child: RoundedInputField(
-                icon: Icons.email_outlined,
-                keyboardType: TextInputType.emailAddress,
-                hintText: "Digite seu e-mail",
-                onChanged: (value) {},
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: size.height * 0.05),
+              Text(
+                "Fazer Login",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: getProportionateScreenHeight(22.0),
+                    color: kPrimaryColor,
+                    height: 1.5,
+                    fontFamily: 'MuseoModerno'),
               ),
-            ),
-            SizedBox(
-              width: size.height * 0.48,
-              child: RoundedPasswordField(
-                hintText: "Digite sua senha",
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: FlatButton(
-                child: Text(
-                  "Esqueci minha senha",
-                  style: TextStyle(
-                      fontSize: 13.0,
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.bold),
+              SizedBox(height: size.height * 0.1),
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedInputField(
+                  icon: Icons.email_outlined,
+                  keyboardType: TextInputType.emailAddress,
+                  hintText: "Digite seu e-mail",
+                  onChanged: (value) {},
+                  validator: (text) {
+                    if (text.isEmpty || !text.contains("@"))
+                      return "E-mail inválido!";
+                  },
                 ),
               ),
-            ),
-            SizedBox(height: size.height * 0.12),
-            SizedBox(
-              width: size.height * 0.48,
-              child: DefaultButton(
-                text: "Entrar",
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return HomeScreen();
-                      },
-                    ),
-                  );
-                },
+              SizedBox(
+                width: size.height * 0.48,
+                child: RoundedPasswordField(
+                  hintText: "Digite sua senha",
+                  validator: (text) {
+                    if (text.isEmpty || text.length < 6)
+                      return "Senha inválida!";
+                  },
+                ),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment.center,
+                child: FlatButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Esqueci minha senha",
+                    style: TextStyle(
+                        fontSize: 13.0,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(height: size.height * 0.12),
+              SizedBox(
+                width: size.height * 0.48,
+                child: DefaultButton(
+                  text: "Entrar",
+                  press: () {
+                    if (_formKey.currentState.validate()) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return HomeScreen();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -111,7 +124,8 @@ class Background extends StatelessWidget {
           Positioned(
             top: 0,
             left: 0,
-            child: Image.asset("assets/images/fundo_09.png", width: size.width * 1.0),
+            child: Image.asset("assets/images/fundo_09.png",
+                width: size.width * 1.0),
           ),
           child,
         ],
