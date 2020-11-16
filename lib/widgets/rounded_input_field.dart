@@ -7,6 +7,7 @@ class RoundedInputField extends StatelessWidget {
   final TextInputType keyboardType;
   final ValueChanged<String> onChanged;
   final ValueChanged<String> validator;
+  final TextEditingController controller;
 
   const RoundedInputField({
     Key key,
@@ -15,6 +16,7 @@ class RoundedInputField extends StatelessWidget {
     this.keyboardType = TextInputType.name,
     this.onChanged,
     this.validator,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class RoundedInputField extends StatelessWidget {
         keyboardType: keyboardType,
         onChanged: onChanged,
         validator: validator,
+        controller: controller,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
             icon: Icon(
