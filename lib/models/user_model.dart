@@ -1,21 +1,52 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class UserModel extends Model {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  FirebaseUser firebaseUser;
+  Map<String, dynamic> userData = Map();
+
   bool isLoading = false;
 
-  void signUp() {}
-
-  void signIn() async {
+  //Criar Usuários no Firebase.
+  void signUp(
+      {@required Map<String, dynamic> userData,
+      @required String pass,
+      @required VoidCallback onSuccess,
+      @required VoidCallback onFail}) {
     isLoading = true;
     notifyListeners();
 
-    await Future.delayed(Duration(seconds: 5));
+    _auth
+        .createUserWithEmailAndPassword(
+            email: userData["email"], password: pass)
+        .then((user) async {
+      firebaseUser = user;
 
-    isLoading = false;
-    notifyListeners();
+      await _saveUserData(userData);
+
+      onSuccess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((e) {
+      onFail();
+      isLoading = false;
+      notifyListeners();
+    });
   }
 
   void signOut() {}
+
+  Future<Null> _saveUserData(Map<String, dynamic> userData) async {
+    this.userData = userData;
+    await Firestore.instance
+        .collection("users")
+        .document(firebaseUser.uid)
+        .setData(userData);
+  }
 }

@@ -30,8 +30,7 @@ class Body extends StatelessWidget {
         builder: (context, child, model) {
           if (model.isLoading)
             return Center(
-              child: CircularProgressIndicator(
-              ),
+              child: CircularProgressIndicator(),
             );
 
           return Form(
@@ -92,9 +91,7 @@ class Body extends StatelessWidget {
                   child: DefaultButton(
                     text: "Entrar",
                     press: () {
-                      if (_formKey.currentState.validate()) {
-                        model.signIn();
-                      }
+                      if (_formKey.currentState.validate()) {}
                     },
                   ),
                 ),
