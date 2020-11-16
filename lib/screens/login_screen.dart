@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lojavirtual_app/models/user_model.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/settings/size_config.dart';
 import 'package:lojavirtual_app/widgets/default_button.dart';
 import 'package:lojavirtual_app/widgets/rounded_input_field.dart';
 import 'package:lojavirtual_app/widgets/rounded_password_field.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'home_screen.dat.dart';
 
@@ -24,82 +26,83 @@ class Body extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Background(
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: size.height * 0.05),
-              Text(
-                "Fazer Login",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: getProportionateScreenHeight(22.0),
-                    color: kPrimaryColor,
-                    height: 1.5,
-                    fontFamily: 'MuseoModerno'),
+      child: SingleChildScrollView(child: ScopedModelDescendant<UserModel>(
+        builder: (context, child, model) {
+          if (model.isLoading)
+            return Center(
+              child: CircularProgressIndicator(
               ),
-              SizedBox(height: size.height * 0.1),
-              SizedBox(
-                width: size.height * 0.48,
-                child: RoundedInputField(
-                  icon: Icons.email_outlined,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: "Digite seu e-mail",
-                  onChanged: (value) {},
-                  validator: (text) {
-                    if (text.isEmpty || !text.contains("@"))
-                      return "E-mail inválido!";
-                  },
+            );
+
+          return Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: size.height * 0.05),
+                Text(
+                  "Fazer Login",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getProportionateScreenHeight(22.0),
+                      color: kPrimaryColor,
+                      height: 1.5,
+                      fontFamily: 'MuseoModerno'),
                 ),
-              ),
-              SizedBox(
-                width: size.height * 0.48,
-                child: RoundedPasswordField(
-                  hintText: "Digite sua senha",
-                  validator: (text) {
-                    if (text.isEmpty || text.length < 6)
-                      return "Senha inválida!";
-                  },
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Esqueci minha senha",
-                    style: TextStyle(
-                        fontSize: 13.0,
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold),
+                SizedBox(height: size.height * 0.1),
+                SizedBox(
+                  width: size.height * 0.48,
+                  child: RoundedInputField(
+                    icon: Icons.email_outlined,
+                    keyboardType: TextInputType.emailAddress,
+                    hintText: "Digite seu e-mail",
+                    onChanged: (value) {},
+                    validator: (text) {
+                      if (text.isEmpty || !text.contains("@"))
+                        return "E-mail inválido!";
+                    },
                   ),
                 ),
-              ),
-              SizedBox(height: size.height * 0.12),
-              SizedBox(
-                width: size.height * 0.48,
-                child: DefaultButton(
-                  text: "Entrar",
-                  press: () {
-                    if (_formKey.currentState.validate()) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return HomeScreen();
-                          },
-                        ),
-                      );
-                    }
-                  },
+                SizedBox(
+                  width: size.height * 0.48,
+                  child: RoundedPasswordField(
+                    hintText: "Digite sua senha",
+                    validator: (text) {
+                      if (text.isEmpty || text.length < 6)
+                        return "Senha inválida!";
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
+                Align(
+                  alignment: Alignment.center,
+                  child: FlatButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Esqueci minha senha",
+                      style: TextStyle(
+                          fontSize: 13.0,
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.12),
+                SizedBox(
+                  width: size.height * 0.48,
+                  child: DefaultButton(
+                    text: "Entrar",
+                    press: () {
+                      if (_formKey.currentState.validate()) {
+                        model.signIn();
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      )),
     );
   }
 }

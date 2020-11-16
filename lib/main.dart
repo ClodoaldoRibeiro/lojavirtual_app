@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lojavirtual_app/models/user_model.dart';
 import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/theme.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +12,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: KNomeLoja,
-      debugShowCheckedModeBanner: false,
-      theme: theme(),
-      home: WelcomeScreen(),
+    return ScopedModel<UserModel>(
+      model: UserModel(),
+      child: MaterialApp(
+        title: KNomeLoja,
+        debugShowCheckedModeBanner: false,
+        theme: theme(),
+        home: WelcomeScreen(),
+      ),
     );
   }
 }
