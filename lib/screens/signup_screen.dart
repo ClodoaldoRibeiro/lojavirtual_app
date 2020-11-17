@@ -8,26 +8,14 @@ import 'package:lojavirtual_app/widgets/rounded_password_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import 'home_screen.dat.dart';
+
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Body(),
-    );
-  }
-}
-
-class Body extends StatefulWidget {
-  @override
-  _BodyState createState() => _BodyState();
-}
-
-class _BodyState extends State<Body> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
@@ -35,148 +23,175 @@ class _BodyState extends State<Body> {
   final _addressController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Background(
-      child: SingleChildScrollView(child: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model) {
-          if (model.isLoading)
-            return Center(
-              child: CircularProgressIndicator(),
+
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Background(
+        child: SingleChildScrollView(child: ScopedModelDescendant<UserModel>(
+          builder: (context, child, model) {
+            if (model.isLoading)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+
+            return Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: size.height * 0.12),
+                  Text(
+                    "Registra-me",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: getProportionateScreenHeight(22.0),
+                        color: kPrimaryColor,
+                        height: 1.5,
+                        fontFamily: 'MuseoModerno'),
+                  ),
+                  SizedBox(height: size.height * 0.05),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedInputField(
+                      controller: _nameController,
+                      hintText: "Infome o nome completo",
+                      onChanged: (value) {},
+                      validator: (text) {
+                        if (text.isEmpty) return "Informe seu nome!";
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedInputField(
+                      controller: _emailController,
+                      icon: Icons.email_outlined,
+                      keyboardType: TextInputType.emailAddress,
+                      hintText: "Informe seu e-mail",
+                      onChanged: (value) {},
+                      validator: (text) {
+                        if (text.isEmpty || !text.contains("@"))
+                          return "E-mail inválido!";
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedPasswordField(
+                      controller: _passController,
+                      hintText: "Criar uma senha",
+                      onChanged: (value) {},
+                      validator: (text) {
+                        if (text.isEmpty || text.length < 6)
+                          return "Senha inválida!";
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedPasswordField(
+                      controller: _passConfirmController,
+                      hintText: "Confirma sua senha",
+                      onChanged: (value) {},
+                      validator: (text) {
+                        if (text.isEmpty || text.length < 6)
+                          return "Cofirmação inválida!";
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedInputField(
+                      controller: _addressController,
+                      icon: Icons.location_on_outlined,
+                      hintText: "Infome o endereço",
+                      onChanged: (value) {},
+                      validator: (text) {
+                        if (text.isEmpty) return "Informe o endereço!";
+                      },
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.08),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: DefaultButton(
+                      text: "Cadastrar",
+                      press: () {
+                        if (_formKey.currentState.validate()) {
+                          Map<String, dynamic> userData = {
+                            "name": _nameController.text,
+                            "email": _emailController.text,
+                            "address": _addressController.text
+                          };
+
+                          model.signUp(
+                              userData: userData,
+                              pass: _passController.text,
+                              onSuccess: _onSuccess,
+                              onFail: _onFail);
+                        }
+                      },
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.05),
+                  OrDivider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SocalIcon(
+                        iconSrc: "assets/icons/facebook.svg",
+                        press: () {},
+                      ),
+                      SocalIcon(
+                        iconSrc: "assets/icons/twitter.svg",
+                        press: () {},
+                      ),
+                      SocalIcon(
+                        iconSrc: "assets/icons/google-plus.svg",
+                        press: () {},
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.1),
+                ],
+              ),
             );
-
-          return Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: size.height * 0.12),
-                Text(
-                  "Registra-me",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: getProportionateScreenHeight(22.0),
-                      color: kPrimaryColor,
-                      height: 1.5,
-                      fontFamily: 'MuseoModerno'),
-                ),
-                SizedBox(height: size.height * 0.05),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedInputField(
-                    controller: _nameController,
-                    hintText: "Infome o nome completo",
-                    onChanged: (value) {},
-                    validator: (text) {
-                      if (text.isEmpty) return "Informe seu nome!";
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedInputField(
-                    controller: _emailController,
-                    icon: Icons.email_outlined,
-                    keyboardType: TextInputType.emailAddress,
-                    hintText: "Informe seu e-mail",
-                    onChanged: (value) {},
-                    validator: (text) {
-                      if (text.isEmpty || !text.contains("@"))
-                        return "E-mail inválido!";
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedPasswordField(
-                    controller: _passController,
-                    hintText: "Criar uma senha",
-                    onChanged: (value) {},
-                    validator: (text) {
-                      if (text.isEmpty || text.length < 6)
-                        return "Senha inválida!";
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedPasswordField(
-                    controller: _passConfirmController,
-                    hintText: "Confirma sua senha",
-                    onChanged: (value) {},
-                    validator: (text) {
-                      if (text.isEmpty || text.length < 6)
-                        return "Cofirmação inválida!";
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedInputField(
-                    controller: _addressController,
-                    icon: Icons.location_on_outlined,
-                    hintText: "Infome o endereço",
-                    onChanged: (value) {},
-                    validator: (text) {
-                      if (text.isEmpty) return "Informe o endereço!";
-                    },
-                  ),
-                ),
-                SizedBox(height: size.height * 0.08),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: DefaultButton(
-                    text: "Cadastrar",
-                    press: () {
-                      if (_formKey.currentState.validate()) {
-                        Map<String, dynamic> userData = {
-                          "name": _nameController.text,
-                          "email": _emailController.text,
-                          "address": _addressController.text
-                        };
-
-                        model.signUp(
-                            userData: userData,
-                            pass: _passController.text,
-                            onSuccess: _onSuccess,
-                            onFail: _onFail);
-                      }
-                    },
-                  ),
-                ),
-                SizedBox(height: size.height * 0.05),
-                OrDivider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SocalIcon(
-                      iconSrc: "assets/icons/facebook.svg",
-                      press: () {},
-                    ),
-                    SocalIcon(
-                      iconSrc: "assets/icons/twitter.svg",
-                      press: () {},
-                    ),
-                    SocalIcon(
-                      iconSrc: "assets/icons/google-plus.svg",
-                      press: () {},
-                    ),
-                  ],
-                ),
-                SizedBox(height: size.height * 0.1),
-              ],
-            ),
-          );
-        },
-      )),
+          },
+        )),
+      ),
     );
   }
 
-  void _onSuccess() {}
+  void _onSuccess() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Usuário criado com sucesso!"),
+      backgroundColor: kPrimaryColor,
+      duration: Duration(seconds: 2),
+    ));
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return HomeScreen();
+          },
+        ),
+      );
+    });
+  }
 
-  void _onFail() {}
+  void _onFail() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Falha ao criar usuário!"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 4),
+    ));
+  }
 }
 
 class Background extends StatelessWidget {

@@ -91,7 +91,16 @@ class Body extends StatelessWidget {
                   child: DefaultButton(
                     text: "Entrar",
                     press: () {
-                      if (_formKey.currentState.validate()) {}
+                      if (_formKey.currentState.validate()) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomeScreen();
+                            },
+                          ),
+                        );
+                      }
                     },
                   ),
                 ),
