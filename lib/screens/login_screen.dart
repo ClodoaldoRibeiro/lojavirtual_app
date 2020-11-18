@@ -74,11 +74,19 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: FlatButton(
                       onPressed: () {
-                        if (_emailController.text.isEmpty){
+                        if (_emailController.text.isEmpty) {
                           _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text("Informe seu e-mail para recuperar a senha"),
+                            content: Text(
+                                "Informe seu e-mail para recuperar a senha"),
                             backgroundColor: Colors.redAccent,
                             duration: Duration(seconds: 4),
+                          ));
+                        } else {
+                          model.recoverPass(_emailController.text);
+                          _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text("Confira seu e-mail!"),
+                            backgroundColor: Theme.of(context).primaryColor,
+                            duration: Duration(seconds: 2),
                           ));
                         }
                       },
@@ -97,15 +105,14 @@ class LoginScreen extends StatelessWidget {
                     child: DefaultButton(
                       text: "Entrar",
                       press: () {
-                        if (_formKey.currentState.validate()) {}
-
-                        model.signIn(
-                            email: _emailController.text,
-                            pass: _passController.text,
-                            onSuccess: () {
-
-                              /// Encaminha para a Tela Inicial
-                              Future.delayed(Duration(seconds: 1)).then((_) {
+                        //Verifica se os dados fonecedios são válidos
+                        if (_formKey.currentState.validate()) {
+                          /// Autenticar no Google
+                          model.signIn(
+                              email: _emailController.text,
+                              pass: _passController.text,
+                              onSuccess: () {
+                                /// Encaminha para a Tela Inicial
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -114,9 +121,9 @@ class LoginScreen extends StatelessWidget {
                                     },
                                   ),
                                 );
-                              });
-                            },
-                            onFail: _onFail);
+                              },
+                              onFail: _onFail);
+                        }
                       },
                     ),
                   ),
@@ -133,7 +140,7 @@ class LoginScreen extends StatelessWidget {
 
   void _onFail() {
     _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text("Falha ao fazer login!"),
+      content: Text("Não foi possível efetuar login!"),
       backgroundColor: Colors.redAccent,
       duration: Duration(seconds: 4),
     ));

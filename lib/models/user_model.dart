@@ -106,4 +106,8 @@ class UserModel extends Model {
     }
     notifyListeners();
   }
+
+  void recoverPass(String email) {
+    _auth.sendPasswordResetEmail(email: email);
+  }
 }

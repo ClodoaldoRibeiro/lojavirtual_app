@@ -99,8 +99,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       hintText: "Confirma sua senha",
                       onChanged: (value) {},
                       validator: (text) {
-                        if (text.isEmpty || text.length < 6)
-                          return "Cofirmação inválida!";
+                        if (text.isEmpty) return "Empreencha a cofirmação";
+
+                        if (text.length < 6)
+                          return "Cofirmação menor que 6 caracteres!";
+
+                        if (_passController.text != _passConfirmController.text)
+                          return "A confirmação está diferente";
                       },
                     ),
                   ),
