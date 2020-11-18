@@ -10,106 +10,133 @@ import 'package:scoped_model/scoped_model.dart';
 import 'home_screen.dat.dart';
 
 class LoginScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Body(),
-    );
-  }
-}
-
-class Body extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _emailController = TextEditingController();
+  final _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Background(
-      child: SingleChildScrollView(child: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model) {
-          if (model.isLoading)
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Background(
+        child: SingleChildScrollView(child: ScopedModelDescendant<UserModel>(
+          builder: (context, child, model) {
+            if (model.isLoading)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
 
-          return Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: size.height * 0.05),
-                Text(
-                  "Fazer Login",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: getProportionateScreenHeight(22.0),
-                      color: kPrimaryColor,
-                      height: 1.5,
-                      fontFamily: 'MuseoModerno'),
-                ),
-                SizedBox(height: size.height * 0.1),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedInputField(
-                    icon: Icons.email_outlined,
-                    keyboardType: TextInputType.emailAddress,
-                    hintText: "Digite seu e-mail",
-                    onChanged: (value) {},
-                    validator: (text) {
-                      if (text.isEmpty || !text.contains("@"))
-                        return "E-mail inválido!";
-                    },
+            return Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: size.height * 0.05),
+                  Text(
+                    "Fazer Login",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: getProportionateScreenHeight(22.0),
+                        color: kPrimaryColor,
+                        height: 1.5,
+                        fontFamily: 'MuseoModerno'),
                   ),
-                ),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: RoundedPasswordField(
-                    hintText: "Digite sua senha",
-                    validator: (text) {
-                      if (text.isEmpty || text.length < 6)
-                        return "Senha inválida!";
-                    },
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Esqueci minha senha",
-                      style: TextStyle(
-                          fontSize: 13.0,
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold),
+                  SizedBox(height: size.height * 0.1),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedInputField(
+                      controller: _emailController,
+                      icon: Icons.email_outlined,
+                      keyboardType: TextInputType.emailAddress,
+                      hintText: "Digite seu e-mail",
+                      onChanged: (value) {},
+                      validator: (text) {
+                        if (text.isEmpty || !text.contains("@"))
+                          return "E-mail inválido!";
+                      },
                     ),
                   ),
-                ),
-                SizedBox(height: size.height * 0.12),
-                SizedBox(
-                  width: size.height * 0.48,
-                  child: DefaultButton(
-                    text: "Entrar",
-                    press: () {
-                      if (_formKey.currentState.validate()) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return HomeScreen();
-                            },
-                          ),
-                        );
-                      }
-                    },
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: RoundedPasswordField(
+                      controller: _passController,
+                      hintText: "Digite sua senha",
+                      validator: (text) {
+                        if (text.isEmpty || text.length < 6)
+                          return "Senha inválida!";
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      )),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FlatButton(
+                      onPressed: () {
+                        if (_emailController.text.isEmpty){
+                          _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text("Informe seu e-mail para recuperar a senha"),
+                            backgroundColor: Colors.redAccent,
+                            duration: Duration(seconds: 4),
+                          ));
+                        }
+                      },
+                      child: Text(
+                        "Esqueci minha senha",
+                        style: TextStyle(
+                            fontSize: 13.0,
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.12),
+                  SizedBox(
+                    width: size.height * 0.48,
+                    child: DefaultButton(
+                      text: "Entrar",
+                      press: () {
+                        if (_formKey.currentState.validate()) {}
+
+                        model.signIn(
+                            email: _emailController.text,
+                            pass: _passController.text,
+                            onSuccess: () {
+
+                              /// Encaminha para a Tela Inicial
+                              Future.delayed(Duration(seconds: 1)).then((_) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return HomeScreen();
+                                    },
+                                  ),
+                                );
+                              });
+                            },
+                            onFail: _onFail);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        )),
+      ),
     );
+  }
+
+  void _onSuccess() {}
+
+  void _onFail() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Falha ao fazer login!"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 4),
+    ));
   }
 }
 

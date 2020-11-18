@@ -13,6 +13,13 @@ class UserModel extends Model {
 
   bool isLoading = false;
 
+  @override
+  void addListener(VoidCallback listener) {
+    super.addListener(listener);
+
+    _loadCurrentUser();
+  }
+
   //Criar Usuários no Firebase.
   void signUp(
       {@required Map<String, dynamic> userData,
@@ -61,38 +68,39 @@ class UserModel extends Model {
     return firebaseUser != null;
   }
 
-
-  void signIn({@required String email, @required String pass,
-    @required VoidCallback onSuccess, @required VoidCallback onFail}) async {
-
+  void signIn(
+      {@required String email,
+      @required String pass,
+      @required VoidCallback onSuccess,
+      @required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
-    _auth.signInWithEmailAndPassword(email: email, password: pass).then(
-            (user) async {
-          firebaseUser = user;
+    _auth
+        .signInWithEmailAndPassword(email: email, password: pass)
+        .then((user) async {
+      firebaseUser = user;
 
-          await _loadCurrentUser();
+      await _loadCurrentUser();
 
-          onSuccess();
-          isLoading = false;
-          notifyListeners();
-
-        }).catchError((e){
+      onSuccess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((e) {
       onFail();
       isLoading = false;
       notifyListeners();
     });
-
   }
 
   Future<Null> _loadCurrentUser() async {
-    if(firebaseUser == null)
-      firebaseUser = await _auth.currentUser();
-    if(firebaseUser != null){
-      if(userData["name"] == null){
-        DocumentSnapshot docUser =
-        await Firestore.instance.collection("users").document(firebaseUser.uid).get();
+    if (firebaseUser == null) firebaseUser = await _auth.currentUser();
+    if (firebaseUser != null) {
+      if (userData["name"] == null) {
+        DocumentSnapshot docUser = await Firestore.instance
+            .collection("users")
+            .document(firebaseUser.uid)
+            .get();
         userData = docUser.data;
       }
     }
