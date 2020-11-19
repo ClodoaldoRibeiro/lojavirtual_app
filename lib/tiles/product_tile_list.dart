@@ -56,6 +56,7 @@ class ProductTileList extends StatelessWidget {
                     Container(
                         alignment: Alignment.bottomRight,
                         child: IconButton(
+                          onPressed: () {},
                           icon: Icon(Icons.favorite_outline),
                         )),
                   ],
