@@ -11,6 +11,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Body(),
     );
@@ -107,7 +108,8 @@ class Background extends StatelessWidget {
           Positioned(
             top: 0,
             left: 0,
-            child: Image.asset("assets/images/fundo_09.png", width: size.width * 1.0),
+            child: Image.asset("assets/images/fundo_09.png",
+                width: size.width * 1.0),
           ),
           child,
         ],

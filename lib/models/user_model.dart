@@ -13,6 +13,10 @@ class UserModel extends Model {
 
   bool isLoading = false;
 
+  static UserModel of(BuildContext context){
+    return ScopedModel.of<UserModel>(context);
+  }
+
   @override
   void addListener(VoidCallback listener) {
     super.addListener(listener);
@@ -47,6 +51,7 @@ class UserModel extends Model {
     });
   }
 
+  ///Faz o logout do usário no aplicativo
   void signOut() async {
     await _auth.signOut();
 
@@ -56,6 +61,7 @@ class UserModel extends Model {
     notifyListeners();
   }
 
+  ///Salva os dados do usuário no banco de dados
   Future<Null> _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
     await Firestore.instance
@@ -64,10 +70,12 @@ class UserModel extends Model {
         .setData(userData);
   }
 
+  //Verifica se possue algum usuário logado.
   bool isLoggedIn() {
     return firebaseUser != null;
   }
 
+  //Faz login de um usuário no aplicativo.
   void signIn(
       {@required String email,
       @required String pass,
@@ -93,6 +101,7 @@ class UserModel extends Model {
     });
   }
 
+  ///Carrega usuário logado.
   Future<Null> _loadCurrentUser() async {
     if (firebaseUser == null) firebaseUser = await _auth.currentUser();
     if (firebaseUser != null) {
@@ -107,6 +116,7 @@ class UserModel extends Model {
     notifyListeners();
   }
 
+  /// recupera a senha por email.
   void recoverPass(String email) {
     _auth.sendPasswordResetEmail(email: email);
   }

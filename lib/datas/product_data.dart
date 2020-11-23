@@ -12,6 +12,8 @@ class ProductData {
   List images;
   List sizes;
 
+  ProductData();
+
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
     title = snapshot.data["title"];

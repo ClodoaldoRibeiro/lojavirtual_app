@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lojavirtual_app/datas/cart_product.dart';
 import 'package:lojavirtual_app/datas/product_data.dart';
+import 'package:lojavirtual_app/models/cart_model.dart';
+import 'package:lojavirtual_app/models/user_model.dart';
+import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:lojavirtual_app/widgets/default_button.dart';
@@ -116,8 +120,32 @@ class _ProductScreenState extends State<ProductScreen> {
                   height: 35.0,
                 ),
                 DefaultButton(
-                  text: "Adicionar ao carinho",
-                  press: size != null ? () {} : null,
+                  text: UserModel.of(context).isLoggedIn()
+                      ? "Adicionar ao carinho"
+                      : "Entre para comprar",
+                  press: size != null
+                      ? () {
+                          if (UserModel.of(context).isLoggedIn()) {
+                            CartProduct cartProduct = CartProduct();
+                            cartProduct.size = size;
+                            cartProduct.quantity = 1;
+                            cartProduct.pid = productData.id;
+                            cartProduct.category = productData.category;
+                            cartProduct.productData = productData;
+
+                            CartModel.of(context).addCartItem(cartProduct);
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return WelcomeScreen();
+                                },
+                              ),
+                            );
+                          }
+                        }
+                      : null,
                 ),
                 SizedBox(
                   height: 50.0,
