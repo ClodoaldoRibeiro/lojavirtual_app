@@ -58,6 +58,7 @@ class CustomDrawer extends StatelessWidget {
                                     color: Colors.black,
                                   ),
                                 ),
+
                                 SizedBox(height: 10.0),
                                 GestureDetector(
                                   child: Text( !model.isLoggedIn() ? "Entre ou cadastre-se >" : "Sair",

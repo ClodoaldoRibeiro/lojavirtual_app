@@ -13,9 +13,8 @@ class UserModel extends Model {
 
   bool isLoading = false;
 
-  static UserModel of(BuildContext context){
-    return ScopedModel.of<UserModel>(context);
-  }
+  static UserModel of(BuildContext context) =>
+      ScopedModel.of<UserModel>(context);
 
   @override
   void addListener(VoidCallback listener) {
@@ -91,7 +90,8 @@ class UserModel extends Model {
 
       await _loadCurrentUser();
 
-      onSuccess();
+      //onSuccess();
+
       isLoading = false;
       notifyListeners();
     }).catchError((e) {

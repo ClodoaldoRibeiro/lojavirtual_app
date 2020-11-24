@@ -113,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                               pass: _passController.text,
                               onSuccess: () {
                                 /// Encaminha para a Tela Inicial
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {

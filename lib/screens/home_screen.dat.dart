@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tabs/home_tab.dart';
 import 'package:lojavirtual_app/tabs/products_tab.dart';
+import 'package:lojavirtual_app/widgets/cart_button.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
 import 'package:lojavirtual_app/widgets/custom_drawer.dart';
 
@@ -17,7 +18,11 @@ class HomeScreen extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         //Scaffold = Novidades
-        Scaffold(drawer: CustomDrawer(_pageController), body: HomeTab()),
+        Scaffold(
+          drawer: CustomDrawer(_pageController),
+          body: HomeTab(),
+          floatingActionButton: CartButton(),
+        ),
 
         //Scaffold = KProdutos
         Scaffold(
@@ -41,7 +46,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ProductsTab(),
                   ],
-                ))),
+                )),
+            floatingActionButton: CartButton()),
 
         //Scaffold = KMeusPedidos
         Scaffold(
@@ -87,7 +93,8 @@ class HomeScreen extends StatelessWidget {
                           width: size.width * 1.0),
                     ),
                   ],
-                ))),
+                )),
+            floatingActionButton: CartButton()),
 
         //Scaffold = KEncontrarLojas
         Scaffold(

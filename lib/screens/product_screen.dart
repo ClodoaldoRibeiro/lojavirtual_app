@@ -3,6 +3,7 @@ import 'package:lojavirtual_app/datas/cart_product.dart';
 import 'package:lojavirtual_app/datas/product_data.dart';
 import 'package:lojavirtual_app/models/cart_model.dart';
 import 'package:lojavirtual_app/models/user_model.dart';
+import 'package:lojavirtual_app/screens/cart_screen.dart';
 import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -134,6 +135,16 @@ class _ProductScreenState extends State<ProductScreen> {
                             cartProduct.productData = productData;
 
                             CartModel.of(context).addCartItem(cartProduct);
+
+                            //Redireciona diretamente ao rarinho
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return CartScreen();
+                                },
+                              ),
+                            );
                           } else {
                             Navigator.push(
                               context,
