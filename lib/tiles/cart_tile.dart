@@ -34,14 +34,21 @@ class CartTile extends StatelessWidget {
               children: [
                 Text(
                   cartProduct.productData.title,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.0),
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17.0),
                 ),
                 Text(
-                  "R\$ ${cartProduct.productData.price.toStringAsFixed(2)}",
+                  "Tamanho: ${cartProduct.size}",
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 14.0),
+                ),
+                Text(
+                  "Unitário R\$ ${cartProduct.productData.price.toStringAsFixed(2)}",
                   style: TextStyle(
                       color: kPrimaryColor,
-                      fontSize: 16.0,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 12.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

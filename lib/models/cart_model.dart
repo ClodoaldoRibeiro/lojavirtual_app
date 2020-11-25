@@ -9,6 +9,8 @@ class CartModel extends Model {
   bool isLoading = false;
 
   List<CartProduct> products = [];
+  String couponCode;
+  int discountPercentage = 0;
 
   static CartModel of(BuildContext context) {
     return ScopedModel.of<CartModel>(context);
@@ -89,5 +91,10 @@ class CartModel extends Model {
         query.documents.map((doc) => CartProduct.fromDocument(doc)).toList();
 
     notifyListeners();
+  }
+
+  void setCoupon(String couponCode, int discountPercentage) {
+    this.couponCode = couponCode;
+    this.discountPercentage = discountPercentage;
   }
 }
