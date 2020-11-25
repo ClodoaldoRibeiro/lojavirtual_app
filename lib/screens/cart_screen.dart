@@ -3,6 +3,7 @@ import 'package:lojavirtual_app/models/cart_model.dart';
 import 'package:lojavirtual_app/models/user_model.dart';
 import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
+import 'package:lojavirtual_app/tiles/cart_tile.dart';
 import 'package:lojavirtual_app/widgets/default_button.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -101,7 +102,13 @@ class CartScreen extends StatelessWidget {
           } else {
             return ListView(
               children: <Widget>[
-                Column()
+                Column(
+                  children: model.products.map(
+                          (product){
+                        return CartTile(product);
+                      }
+                  ).toList(),
+                ),
               ],
             );
           }
