@@ -6,6 +6,7 @@ import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tiles/cart_tile.dart';
 import 'package:lojavirtual_app/widgets/default_button.dart';
 import 'package:lojavirtual_app/widgets/discount_card.dart';
+import 'package:lojavirtual_app/widgets/ship_card.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 // Classe de Screen de meu Carrinho
@@ -109,6 +110,8 @@ class CartScreen extends StatelessWidget {
                   }).toList(),
                 ),
                 DiscountCard(),
+                ShipCard(),
+
               ],
             );
           }
