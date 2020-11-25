@@ -51,7 +51,7 @@ class CartTile extends StatelessWidget {
                       color: kPrimaryColor,
                       onPressed: cartProduct.quantity > 1
                           ? () {
-                              //CartModel.of(context).decProduct(cartProduct);
+                              CartModel.of(context).decProduct(cartProduct);
                             }
                           : null,
                     ),
@@ -60,7 +60,7 @@ class CartTile extends StatelessWidget {
                       icon: Icon(Icons.add),
                       color: kPrimaryColor,
                       onPressed: () {
-                        // CartModel.of(context).incProduct(cartProduct);
+                        CartModel.of(context).incProduct(cartProduct);
                       },
                     ),
                     FlatButton(
