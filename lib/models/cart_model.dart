@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class CartModel extends Model {
   UserModel user;
+  bool isLoading = false;
 
   List<CartProduct> products = [];
 
