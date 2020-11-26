@@ -5,9 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 import 'default_button.dart';
 
 class CartPrice extends StatelessWidget {
-  final VoidCallback buy;
 
-  CartPrice(this.buy);
+  CartPrice();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class CartPrice extends StatelessWidget {
                 Text(
                   "Resumo do pedido",
                   textAlign: TextAlign.start,
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15.0),
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15.5),
                 ),
                 SizedBox(
                   height: 20.0,
@@ -70,20 +69,13 @@ class CartPrice extends StatelessWidget {
                           fontWeight: FontWeight.w800, fontSize: 14.0),
                     ),
                     Text(
-                      "R\$ ${total.toStringAsFixed(2)}",
+                      "R\$ ${total.toStringAsFixed(2)} ",
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w800),
                     )
                   ],
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                DefaultButton(
-                  text: "Finalizar pedido",
-                  press: buy,
                 ),
               ],
             );

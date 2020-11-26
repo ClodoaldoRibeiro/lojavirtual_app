@@ -93,6 +93,7 @@ class CartModel extends Model {
     notifyListeners();
   }
 
+  //Configura o cumpom de desconto
   void setCoupon(String couponCode, int discountPercentage) {
     this.couponCode = couponCode;
     this.discountPercentage = discountPercentage;
@@ -102,6 +103,7 @@ class CartModel extends Model {
     notifyListeners();
   }
 
+  //recupera o valor total dos produtos
   double getProductsPrice() {
     double price = 0.0;
     for (CartProduct c in products) {
@@ -110,19 +112,82 @@ class CartModel extends Model {
     return price;
   }
 
+  //recupera o valor do desconto
   double getDiscount() {
     return getProductsPrice() * discountPercentage / 100;
   }
 
+  //Recupera o valor do preco do frete
   double getShipPrice() {
     return 9.99;
   }
 
+  //Recupera o valot total do pedido
   double getTotal() {
     double price = getProductsPrice();
     double discount = getDiscount();
     double ship = getShipPrice();
 
     return (price + ship) - discount;
+  }
+
+  //lança um pedido no sistema
+  Future<String> finishOrder() async {
+    if (products.length == 0) return null;
+
+    isLoading = true;
+    notifyListeners();
+
+    //Obter os valores do que está no carrinho
+    double productsPrice = getProductsPrice();
+    double shipPrice = getShipPrice();
+    double discount = getDiscount();
+    double totalPrice = getTotal();
+
+    //Gerando o pedido no firebase
+    DocumentReference refOrder =
+        await Firestore.instance.collection("orders").add({
+      "clientId": user.firebaseUser.uid,
+      "products": products.map((cartProduct) => cartProduct.toMap()).toList(),
+      "shipPrice": shipPrice,
+      "productsPrice": productsPrice,
+      "discount": discount,
+      "totalPrice": totalPrice,
+      "status": 1
+    });
+
+    //lançar a referência do pedido na conta do usuário
+    await Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("orders")
+        .document(refOrder.documentID)
+        .setData({"orderId": refOrder.documentID});
+
+    //Recupera dos dados do carinho do usuário
+    QuerySnapshot query = await Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("cart")
+        .getDocuments();
+
+    //Deleta cada item do carrinho
+    for (DocumentSnapshot doc in query.documents) {
+      doc.reference.delete();
+    }
+
+    //Limpa os produtos localmente do carrinho
+    products.clear();
+    //Configura o cumpom de desconto como sendo null
+    couponCode = null;
+    //Configura o percentual de desconto como 0
+    discountPercentage = 0;
+
+    //Notifica o Status do pedido
+    isLoading = false;
+    notifyListeners();
+
+    //Retorno o número do pedido
+    return refOrder.documentID;
   }
 }

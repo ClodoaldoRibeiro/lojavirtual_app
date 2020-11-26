@@ -72,7 +72,7 @@ class CartTile extends StatelessWidget {
                       },
                     ),
                     FlatButton(
-                      child: Text("Remover"),
+                      child: Icon(Icons.delete_outline),
                       textColor: Colors.grey[500],
                       onPressed: () {
                         CartModel.of(context).removeCartItem(cartProduct);

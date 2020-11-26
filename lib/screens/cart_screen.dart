@@ -10,10 +10,13 @@ import 'package:lojavirtual_app/widgets/discount_card.dart';
 import 'package:lojavirtual_app/widgets/ship_card.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import 'order_screen.dart';
+
 // Classe de Screen de meu Carrinho
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -86,7 +89,7 @@ class CartScreen extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.shopping_cart_outlined,
-                    size: 80.0,
+                    size: 150.0,
                     color: kPrimaryColor,
                   ),
                   SizedBox(
@@ -111,8 +114,31 @@ class CartScreen extends StatelessWidget {
                 ),
                 DiscountCard(),
                 ShipCard(),
-                CartPrice(() {}),
-
+                CartPrice(),
+                SizedBox(
+                  height: 30.0,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      width: size.height * 0.48,
+                      child: DefaultButton(
+                        text: "Finalizar pedido",
+                        press: () async {
+                          String orderId = await model.finishOrder();
+                          if (orderId != null)
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        OrderScreen(orderId)));
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.0,
+                ),
               ],
             );
           }
