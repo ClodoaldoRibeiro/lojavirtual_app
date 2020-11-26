@@ -17,9 +17,11 @@ class CartPrice extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: ScopedModelDescendant<CartModel>(
           builder: (context, child, model) {
+            ///Obter dos valores de cada cateroria
             double price = model.getProductsPrice();
             double discount = model.getDiscount();
             double ship = model.getShipPrice();
+            double total = model.getTotal();
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +70,7 @@ class CartPrice extends StatelessWidget {
                           fontWeight: FontWeight.w800, fontSize: 14.0),
                     ),
                     Text(
-                      "R\$ ${(price + ship - discount).toStringAsFixed(2)}",
+                      "R\$ ${total.toStringAsFixed(2)}",
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 14.0,

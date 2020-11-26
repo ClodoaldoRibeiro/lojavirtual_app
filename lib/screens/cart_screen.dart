@@ -14,7 +14,6 @@ import 'package:scoped_model/scoped_model.dart';
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -113,6 +112,7 @@ class CartScreen extends StatelessWidget {
                 DiscountCard(),
                 ShipCard(),
                 CartPrice(() {}),
+
               ],
             );
           }
