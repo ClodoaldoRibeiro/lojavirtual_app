@@ -97,4 +97,16 @@ class CartModel extends Model {
     this.couponCode = couponCode;
     this.discountPercentage = discountPercentage;
   }
+
+  double getProductsPrice() {
+    return 0.0;
+  }
+
+  double getDiscount() {
+    return 0.0;
+  }
+
+  double getShipPrice() {
+    return 0.0;
+  }
 }
