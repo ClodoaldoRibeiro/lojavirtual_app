@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tabs/home_tab.dart';
 import 'package:lojavirtual_app/tabs/orders_tab.dart';
+import 'package:lojavirtual_app/tabs/places_tab.dart';
 import 'package:lojavirtual_app/tabs/products_tab.dart';
 import 'package:lojavirtual_app/widgets/cart_button.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
@@ -12,7 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return PageView(
       controller: _pageController,
@@ -39,13 +39,8 @@ class HomeScreen extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Image.asset("assets/images/fundo_09.png",
-                          width: size.width * 1.0),
-                    ),
-
+                    //Fundo da aplicação
+                    background(size),
                     //Tab que irá exir os produtos
                     ProductsTab(),
                   ],
@@ -66,13 +61,8 @@ class HomeScreen extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Image.asset("assets/images/fundo_09.png",
-                        width: size.width * 1.0),
-                  ),
-
+                  //Fundo da aplicação
+                  background(size),
                   //Tab responsável por listar os pedido
                   OrdersTab(),
                 ],
@@ -94,12 +84,8 @@ class HomeScreen extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Image.asset("assets/images/fundo_09.png",
-                          width: size.width * 1.0),
-                    ),
+                    //Fundo da aplicação
+                    background(size),
                   ],
                 )),
             floatingActionButton: CartButton()),
@@ -112,35 +98,25 @@ class HomeScreen extends StatelessWidget {
               centerTitle: true,
             ),
             drawer: CustomDrawer(_pageController),
-            body: Container(
-              color: Colors.white,
-            )),
-
-        //Scaffold = KContato
-        Scaffold(
-            appBar: AppBar(
-              title: Text(KContato, style: headingStyle),
-              backgroundColor: kPrimaryColor,
-              centerTitle: true,
-            ),
-            drawer: CustomDrawer(_pageController),
-            body: Container(
-              color: Colors.white,
-            )),
-
-        //Scaffold = KConfiguracoes
-        Scaffold(
-            appBar: AppBar(
-              title: Text(KConfiguracoes, style: headingStyle),
-              backgroundColor: kPrimaryColor,
-              centerTitle: true,
-            ),
-            drawer: CustomDrawer(_pageController),
-            body: Container(
-              color: Colors.white,
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                //Fundo da aplicação
+                background(size),
+                //Exibir tab de encontrar lojas
+                PlacesTab(),
+              ],
             )),
         //Scaffold = KConfiguracoes
       ],
+    );
+  }
+
+  Positioned background(Size size) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      child: Image.asset("assets/images/fundo_09.png", width: size.width * 1.0),
     );
   }
 }

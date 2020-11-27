@@ -58,20 +58,23 @@ class CustomDrawer extends StatelessWidget {
                                     color: Colors.black,
                                   ),
                                 ),
-
                                 SizedBox(height: 10.0),
                                 GestureDetector(
-                                  child: Text( !model.isLoggedIn() ? "Entre ou cadastre-se >" : "Sair",
+                                  child: Text(
+                                    !model.isLoggedIn()
+                                        ? "Entre ou cadastre-se >"
+                                        : "Sair",
                                     style: TextStyle(
                                         color: kPrimaryColor,
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  onTap: (){
-                                    if(!model.isLoggedIn())
+                                  onTap: () {
+                                    if (!model.isLoggedIn())
                                       Navigator.of(context).push(
-                                          MaterialPageRoute(builder: (context)=>WelcomeScreen())
-                                      );
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WelcomeScreen()));
                                     else
                                       model.signOut();
                                   },
@@ -92,12 +95,8 @@ class CustomDrawer extends StatelessWidget {
                   pageController, 3),
               DrawerTile(Icons.location_on_outlined, KEncontrarLojas,
                   pageController, 4),
-              DrawerTile(
-                  Icons.phone_android_outlined, KContato, pageController, 5),
-              DrawerTile(Icons.settings_applications_outlined, KConfiguracoes,
-                  pageController, 6),
               Divider(),
-              DrawerTile(Icons.exit_to_app_outlined, KSair, pageController, 7),
+              DrawerTile(Icons.exit_to_app_outlined, KSair, pageController, 5),
             ],
           )
         ],
