@@ -54,29 +54,31 @@ class HomeScreen extends StatelessWidget {
 
         //Scaffold = KMeusPedidos
         Scaffold(
-            appBar: AppBar(
-              title: Text(kMeusPedidos, style: headingStyle),
-              backgroundColor: kPrimaryColor,
-              centerTitle: true,
-            ),
-            drawer: CustomDrawer(_pageController),
-            body: Container(
-                height: size.height,
-                width: double.infinity,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Image.asset("assets/images/fundo_09.png",
-                          width: size.width * 1.0),
-                    ),
+          appBar: AppBar(
+            title: Text(kMeusPedidos, style: headingStyle),
+            backgroundColor: kPrimaryColor,
+            centerTitle: true,
+          ),
+          drawer: CustomDrawer(_pageController),
+          body: Container(
+              height: size.height,
+              width: double.infinity,
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Image.asset("assets/images/fundo_09.png",
+                        width: size.width * 1.0),
+                  ),
 
-                    //Tab responsável por listar os pedido
-                    OrdersTab(),
-                  ],
-                ))),
+                  //Tab responsável por listar os pedido
+                  OrdersTab(),
+                ],
+              )),
+          floatingActionButton: CartButton(),
+        ),
 
         //Scaffold = KMeusFavoritos
         Scaffold(
