@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:lojavirtual_app/tabs/home_tab.dart';
+import 'package:lojavirtual_app/tabs/orders_tab.dart';
 import 'package:lojavirtual_app/tabs/products_tab.dart';
 import 'package:lojavirtual_app/widgets/cart_button.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
@@ -44,6 +45,8 @@ class HomeScreen extends StatelessWidget {
                       child: Image.asset("assets/images/fundo_09.png",
                           width: size.width * 1.0),
                     ),
+
+                    //Tab que irá exir os produtos
                     ProductsTab(),
                   ],
                 )),
@@ -62,13 +65,16 @@ class HomeScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Stack(
                   alignment: Alignment.center,
-                  children: [
+                  children: <Widget>[
                     Positioned(
                       top: 0,
                       left: 0,
                       child: Image.asset("assets/images/fundo_09.png",
                           width: size.width * 1.0),
                     ),
+
+                    //Tab responsável por listar os pedido
+                    OrdersTab(),
                   ],
                 ))),
 

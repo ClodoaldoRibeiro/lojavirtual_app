@@ -55,7 +55,7 @@ class CartScreen extends StatelessWidget {
                   Icon(
                     Icons.remove_shopping_cart_outlined,
                     size: 80.0,
-                    color: kPrimaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                   SizedBox(
                     height: 16.0,
