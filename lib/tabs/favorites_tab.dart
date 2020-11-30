@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/models/user_model.dart';
-import 'package:lojavirtual_app/tiles/order_tile.dart';
+import 'package:lojavirtual_app/tiles/favorites_tile.dart';
 import 'package:lojavirtual_app/widgets/required_user.dart';
 
-class OrdersTab extends StatelessWidget {
+class FavoritesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Mostra os pedidos se o usuário estiver logado
     if (UserModel.of(context).isLoggedIn()) {
       String uid = UserModel.of(context).firebaseUser.uid;
 
@@ -17,7 +15,7 @@ class OrdersTab extends StatelessWidget {
         future: Firestore.instance
             .collection("users")
             .document(uid)
-            .collection("orders")
+            .collection("favorites")
             .getDocuments(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -27,7 +25,7 @@ class OrdersTab extends StatelessWidget {
           } else {
             return ListView(
               children: snapshot.data.documents
-                  .map((doc) => OrderTile(doc.documentID))
+                  .map((doc) => FavoritesTile(doc))
                   .toList()
                   .reversed
                   .toList(),
@@ -36,8 +34,6 @@ class OrdersTab extends StatelessWidget {
         },
       );
     } else {
-      //Caso não esteja logado, ele exibe o formulário para o usuário
-      // fazer login no sistema
       return RequiredUser();
     }
   }
