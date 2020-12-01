@@ -9,6 +9,8 @@ import 'package:lojavirtual_app/widgets/cart_button.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
 import 'package:lojavirtual_app/widgets/custom_drawer.dart';
 
+import 'cart_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   final PageController _pageController = PageController();
 
@@ -25,6 +27,8 @@ class HomeScreen extends StatelessWidget {
         menuProdutos(size),
         //Scaffold = KMeusPedidos
         menuMeusPedidos(size),
+        //Scaffold = KMeuCarinho
+        menuMeuCarinho(size),
         //Scaffold = KMeusFavoritos
         menuMeusFavoritos(size),
         //Scaffold = KEncontrarLojas
@@ -134,6 +138,22 @@ class HomeScreen extends StatelessWidget {
             background(size),
             //Exibir tab de encontrar lojas
             PlacesTab(),
+          ],
+        ));
+  }
+
+  //Scaffold = KMeuCarinho
+  Scaffold menuMeuCarinho(Size size) {
+    return Scaffold(
+        appBar: appBarPadrao(KMeuCarinho),
+        drawer: CustomDrawer(_pageController),
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            //Fundo da aplicação
+            background(size),
+            //Exibir tab de encontrar lojas
+            CartScreen(),
           ],
         ));
   }

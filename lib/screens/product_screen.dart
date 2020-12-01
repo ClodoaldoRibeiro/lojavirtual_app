@@ -85,7 +85,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 34.00,
+                  height: 40.00,
                   child: GridView(
                     padding: EdgeInsets.symmetric(vertical: 4.0),
                     scrollDirection: Axis.horizontal,
@@ -174,6 +174,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Text(
                   productData.description,
                   style: TextStyle(fontSize: 14.0),
+                  textAlign: TextAlign.justify,
                 )
               ],
             ),

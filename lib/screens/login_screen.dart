@@ -78,10 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.center,
                     child: FlatButton(
                       onPressed: () {
-                        if (_emailController.text.isEmpty) {
+
+                        print(_emailController.text);
+                        print(!_emailController.text.contains("@"));
+
+                        if (_emailController.text.isEmpty ||
+                            !_emailController.text.contains("@")) {
                           _scaffoldKey.currentState.showSnackBar(SnackBar(
                             content: Text(
-                                "Informe seu e-mail para recuperar a senha"),
+                                "Informe um e-mail válido para recuperar a senha!"),
                             backgroundColor: Colors.redAccent,
                             duration: Duration(seconds: 4),
                           ));
@@ -131,7 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onSuccess() {
-    Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
 

@@ -6,6 +6,5 @@ const KProdutos = "Produtos";
 const kMeusPedidos = "Meus Pedidos";
 const KMeusFavoritos = "Meus favoritos";
 const KEncontrarLojas = "Encontrar lojas";
-const KContato = "Contato";
-const KConfiguracoes = "Configurações";
+const KMeuCarinho = "Meu carinho";
 const KSair = "Sair";
