@@ -7,13 +7,17 @@ import 'package:lojavirtual_app/widgets/rounded_input_field.dart';
 import 'package:lojavirtual_app/widgets/rounded_password_field.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'home_screen.dat.dart';
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
 
-class LoginScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -111,17 +115,7 @@ class LoginScreen extends StatelessWidget {
                           model.signIn(
                               email: _emailController.text,
                               pass: _passController.text,
-                              onSuccess: () {
-                                /// Encaminha para a Tela Inicial
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return HomeScreen();
-                                    },
-                                  ),
-                                );
-                              },
+                              onSuccess: _onSuccess,
                               onFail: _onFail);
                         }
                       },
@@ -136,11 +130,14 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void _onSuccess() {}
+  void _onSuccess() {
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
+  }
 
   void _onFail() {
     _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text("Não foi possível efetuar login!"),
+      content: Text("Erro ao efetuar login!"),
       backgroundColor: Colors.redAccent,
       duration: Duration(seconds: 4),
     ));

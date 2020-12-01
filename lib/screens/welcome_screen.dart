@@ -52,7 +52,7 @@ class Body extends StatelessWidget {
               child: DefaultButton(
                 text: "Login",
                 press: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -69,7 +69,7 @@ class Body extends StatelessWidget {
               child: DefaultButton(
                 text: "Cadastrar",
                 press: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {

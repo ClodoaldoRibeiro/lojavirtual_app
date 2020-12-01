@@ -7,7 +7,6 @@ import 'package:scoped_model/scoped_model.dart';
 class FavoritesModel extends Model{
   UserModel user;
   bool isLoading = false;
-
   List<ProductData> products = [];
 
   FavoritesModel(this.user) {
@@ -16,6 +15,21 @@ class FavoritesModel extends Model{
     }
   }
 
+  //Adiconar um item ao carrinho
+  void addFavoritesItem(ProductData productData) {
+    products.add(productData);
+
+    Firestore.instance
+        .collection("users")
+        .document(user.firebaseUser.uid)
+        .collection("favorites")
+        .add(productData.toResumedMap())
+        .then((doc) {
+      productData.id = doc.documentID;
+    });
+
+    notifyListeners();
+  }
 
   void _loadFavoritesItems() async {
     QuerySnapshot query = await Firestore.instance

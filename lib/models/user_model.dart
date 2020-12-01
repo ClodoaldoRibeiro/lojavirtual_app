@@ -90,7 +90,7 @@ class UserModel extends Model {
 
       await _loadCurrentUser();
 
-      //onSuccess();
+      onSuccess();
 
       isLoading = false;
       notifyListeners();

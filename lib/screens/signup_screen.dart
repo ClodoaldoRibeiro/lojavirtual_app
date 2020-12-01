@@ -34,7 +34,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: Background(
         child: SingleChildScrollView(child: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
-
             if (model.isLoading)
               return Center(
                 child: CircularProgressIndicator(),
