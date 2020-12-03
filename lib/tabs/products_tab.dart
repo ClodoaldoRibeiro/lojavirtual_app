@@ -7,7 +7,6 @@ class ProductsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    Size size = MediaQuery.of(context).size;
 
     return FutureBuilder<QuerySnapshot>(
         future: Firestore.instance

@@ -9,9 +9,8 @@ import 'package:lojavirtual_app/widgets/cart_button.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
 import 'package:lojavirtual_app/widgets/custom_drawer.dart';
 
-import 'cart_screen.dart';
-
 class HomeScreen extends StatelessWidget {
+  // PageController é que irá controlar a página ativa
   final PageController _pageController = PageController();
 
   @override
@@ -21,24 +20,22 @@ class HomeScreen extends StatelessWidget {
       controller: _pageController,
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        //Scaffold = Novidades
+        //Page = Novidades
         menuInicio(),
-        //Scaffold = KProdutos
+        //Page = KProdutos
         menuProdutos(size),
-        //Scaffold = KMeusPedidos
+        //Page = KMeusPedidos
         menuMeusPedidos(size),
-        //Scaffold = KMeuCarinho
-        menuMeuCarinho(size),
-        //Scaffold = KMeusFavoritos
+        //Page = KMeusFavoritos
         menuMeusFavoritos(size),
-        //Scaffold = KEncontrarLojas
+        //Page = KEncontrarLojas
         menuEncontrarLojas(size),
       ],
     );
   }
 
   //Configura a imagem de fundo do sistema
-  Positioned background(Size size) {
+  Positioned _background(Size size) {
     return Positioned(
       top: 0,
       left: 0,
@@ -47,7 +44,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   //Retorna uma appbar padrão
-  AppBar appBarPadrao(String title) {
+  AppBar _appBarPadrao(String title) {
     return AppBar(
       title: Text(title, style: headingStyle),
       backgroundColor: kPrimaryColor,
@@ -67,7 +64,7 @@ class HomeScreen extends StatelessWidget {
   //Scaffold = KProdutos
   Scaffold menuProdutos(Size size) {
     return Scaffold(
-        appBar: appBarPadrao(KProdutos),
+        appBar: _appBarPadrao(KProdutos),
         drawer: CustomDrawer(_pageController),
         body: Container(
             height: size.height,
@@ -76,7 +73,7 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 //Fundo da aplicação
-                background(size),
+                _background(size),
                 //Tab que irá exir os produtos
                 ProductsTab(),
               ],
@@ -87,7 +84,7 @@ class HomeScreen extends StatelessWidget {
   //Scaffold = KMeusPedidos
   Scaffold menuMeusPedidos(Size size) {
     return Scaffold(
-      appBar: appBarPadrao(kMeusPedidos),
+      appBar: _appBarPadrao(kMeusPedidos),
       drawer: CustomDrawer(_pageController),
       body: Container(
           height: size.height,
@@ -96,7 +93,7 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.center,
             children: <Widget>[
               //Fundo da aplicação
-              background(size),
+              _background(size),
               //Tab responsável por listar os pedido
               OrdersTab(),
             ],
@@ -108,7 +105,7 @@ class HomeScreen extends StatelessWidget {
   //Scaffold = KMeusFavoritos
   Scaffold menuMeusFavoritos(Size size) {
     return Scaffold(
-        appBar: appBarPadrao(KMeusFavoritos),
+        appBar: _appBarPadrao(KMeusFavoritos),
         drawer: CustomDrawer(_pageController),
         body: Container(
             height: size.height,
@@ -117,7 +114,7 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 //Fundo da aplicação
-                background(size),
+                _background(size),
 
                 //Exibir tab de itens favoritos
                 FavoritesTab(),
@@ -129,31 +126,15 @@ class HomeScreen extends StatelessWidget {
   //Scaffold = KEncontrarLojas
   Scaffold menuEncontrarLojas(Size size) {
     return Scaffold(
-        appBar: appBarPadrao(KEncontrarLojas),
+        appBar: _appBarPadrao(KEncontrarLojas),
         drawer: CustomDrawer(_pageController),
         body: Stack(
           alignment: Alignment.center,
           children: [
             //Fundo da aplicação
-            background(size),
+            _background(size),
             //Exibir tab de encontrar lojas
             PlacesTab(),
-          ],
-        ));
-  }
-
-  //Scaffold = KMeuCarinho
-  Scaffold menuMeuCarinho(Size size) {
-    return Scaffold(
-        appBar: appBarPadrao(KMeuCarinho),
-        drawer: CustomDrawer(_pageController),
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            //Fundo da aplicação
-            background(size),
-            //Exibir tab de encontrar lojas
-            CartScreen(),
           ],
         ));
   }

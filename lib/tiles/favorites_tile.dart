@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/models/user_model.dart';
-import 'package:lojavirtual_app/settings/theme.dart';
 
 class FavoritesTile extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
