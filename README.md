@@ -105,6 +105,15 @@
 <h5 align="center">Tela 10: Meus Pedidos </h5>
 </p>
 
+<br /> 
+<br /> 
+<br />
+<br /> 
+<br /> 
+<br />
+
+* [Todas as Imagens](https://github.com/ClodoaldoRibeiro/lojavirtual_app/tree/master/screenshots)
+
  ## License
  Copyright (c) CTI Sistemas. Todos os direitos reservados.
  Licenciado sob a licença [MIT](https://github.com/ClodoaldoRibeiro/chat_app/blob/master/LICENSE.md)
