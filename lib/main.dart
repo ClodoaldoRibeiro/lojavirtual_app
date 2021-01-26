@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/models/user_model.dart';
 import 'package:lojavirtual_app/screens/home_screen.dat.dart';
+import 'package:lojavirtual_app/settings/size_config.dart';
 import 'package:lojavirtual_app/settings/theme.dart';
 import 'package:lojavirtual_app/widgets/items_menu_drawer.dart';
 import 'package:scoped_model/scoped_model.dart';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lojavirtual_app/models/user_model.dart';
 import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
+import 'package:lojavirtual_app/settings/size_config.dart';
 import 'package:lojavirtual_app/tiles/drawer_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -15,6 +16,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Drawer(
       child: Stack(
         children: <Widget>[
@@ -34,7 +36,7 @@ class CustomDrawer extends StatelessWidget {
                       child: Text(
                         KNomeLoja,
                         style: TextStyle(
-                          fontSize: 41.0,
+                          fontSize: getProportionateScreenWidth(40.0),
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor,
                           height: 1.5,
@@ -53,7 +55,7 @@ class CustomDrawer extends StatelessWidget {
                                 Text(
                                   "Olá, ${!model.isLoggedIn() ? "" : model.userData["name"]}",
                                   style: TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: getProportionateScreenWidth(16.0),
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -66,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
                                         : "Sair",
                                     style: TextStyle(
                                         color: kPrimaryColor,
-                                        fontSize: 16.0,
+                                        fontSize: getProportionateScreenWidth(16.0),
                                         fontWeight: FontWeight.bold),
                                   ),
                                   onTap: () {

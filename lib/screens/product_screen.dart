@@ -7,6 +7,7 @@ import 'package:lojavirtual_app/screens/cart_screen.dart';
 import 'package:lojavirtual_app/screens/welcome_screen.dart';
 import 'package:lojavirtual_app/settings/constants.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:lojavirtual_app/settings/size_config.dart';
 import 'package:lojavirtual_app/widgets/default_button.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(productData.title, style: headingStyle),
@@ -54,21 +56,21 @@ class _ProductScreenState extends State<ProductScreen> {
               children: [
                 Text(productData.title,
                     style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: getProportionateScreenWidth(18.0), fontWeight: FontWeight.bold),
                     maxLines: 3),
                 Row(
                   children: [
                     Text(
                       "Apenas ",
                       style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: getProportionateScreenWidth(18.0),
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor),
                     ),
                     Text(
                       "R\$ ${productData.price.toStringAsFixed(2)}",
                       style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: getProportionateScreenWidth(18.0),
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor),
                     ),
@@ -80,12 +82,12 @@ class _ProductScreenState extends State<ProductScreen> {
                 Text(
                   "Tamanho ",
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: getProportionateScreenWidth(16.0),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
-                  height: 40.00,
+                  height:  40.00,
                   child: GridView(
                     padding: EdgeInsets.symmetric(vertical: 4.0),
                     scrollDirection: Axis.horizontal,
